@@ -15,7 +15,7 @@
        
        <a-textarea  v-model="form[item.prop]" v-if="item.type=='textArea'"  :disabled="item.disabled" />
         
- <a-date-picker v-model="form[item.prop]"  v-if="item.type=='dateP'" @change="onChange" :disabled="item.disabled" />
+ <a-date-picker v-model="form[item.prop]"  v-if="item.type=='dateP'"  @change="onChange" :format="dateFormat" :disabled="item.disabled" />
 
     </a-form-model-item>
   </a-form-model>
@@ -34,7 +34,7 @@ export default {
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
      dateFormat: 'YYYY-MM-DD',
-      date: moment(this.form.date, 'YYYY-MM-DD')
+       date: moment(this.form.date, 'YYYY-MM-DD'),
     };
   },
   methods: {
@@ -42,6 +42,9 @@ export default {
     //  this.dateString = dateString
       // console.log(date, dateString)
       console.log(dateString,'dateString')
+      console.log(date,'date')
+      console.log(this.form.date,'33')
+      console.log(this.form.date,'3312')
       this.form.date=dateString
     },
     moment,
@@ -52,6 +55,7 @@ export default {
       return this.$refs.commonForm.validateField
     }
   },
+  
   mounted(){
     
    

@@ -21,6 +21,7 @@ import Popconfirm from 'ant-design-vue/lib/popconfirm'
 import 'ant-design-vue/dist/antd.css';
 
 
+
 Vue.component(Button.name, Button);
 
 Vue.component(Table.name,Table)
@@ -38,6 +39,7 @@ Vue.use(Checkbox)
 Vue.use(TextArea)
 Vue.use(InputNumber)
 
+require('./mock/mock.js')
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
