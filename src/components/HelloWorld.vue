@@ -252,20 +252,24 @@ export default {
     });
     this.getData()
     this.getDiQu()
-    /*
-   //在页面加载时读取sessionStorage里的状态信息
-    if (sessionStorage.getItem("this.data") ) {
-        this.data=JSON.parse(sessionStorage.getItem("this.data"))
-         this.cacheData=JSON.parse(sessionStorage.getItem("cacheData"))
-        
-    } 
+  
+   /*
  
     //在页面刷新时将vuex里的信息保存到sessionStorage里
     window.addEventListener("beforeunload",()=>{
         sessionStorage.setItem("this.data",JSON.stringify(this.data))
         sessionStorage.setItem("cacheData",JSON.stringify(this.cacheData))
     })
-    */
+    //在页面加载时读取sessionStorage里的状态信息
+  
+        this.data=JSON.parse(sessionStorage.getItem("this.data"))
+        console.log(this.data,'data')
+        this.cacheData=this.data
+       //  this.cacheData=JSON.parse(sessionStorage.getItem("cacheData"))
+        this.$forceUpdate()
+    
+  */
+
   },
   methods: {
     handleChange(value, key, column) {
@@ -302,8 +306,7 @@ export default {
       if (target) {
         target[column] =value 
         value=moment(value).format('YYYY-MM-DD');
-         console.log(value,'value')
-         console.log(this.data,'data')
+         
         this.data = newData;
       }
     },
