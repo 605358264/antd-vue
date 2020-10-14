@@ -9,27 +9,54 @@
       >
         <div :key="col.label">
           <div v-if="record.editable">
-             <a-input
-            v-if="record.editable && col.type=='input'"
-            :value="text"
-            @change="(e) => handleChange(e.target.value, record.key, col.label)"       
-          />
-           <a-input-number
-            v-if="record.editable && col.type=='inputNumber'"
-            :value="text"
-            @change="(e) => InputNumberChange(e, record.key, col.label)"       
-          />
-          <a-select  v-if="record.editable && col.type=='select'" @change="(e)=>selectChange(e, record.key, col.label)"  :value="text">
-                  <a-select-option v-for="i in selectArr" :key="i.key" :value="i.key">
-                    {{ i.value }}
-                  </a-select-option>
-          </a-select>
-          <a-radio-group v-if="record.editable && col.type=='radio'"  :value="text" @change="(e)=>selectChange(e.target.value, record.key, col.label)">
-             <a-radio  value="男">男</a-radio>
-           <a-radio value="女" >女</a-radio>
-          </a-radio-group>
-          <a-date-picker v-if="record.editable && col.type=='datePicker'" :valueFormat=dateFormat :value="text" @change="(e)=>dateChange(e, record.key, col.label,)"></a-date-picker>
-          <a-textarea   v-if="record.editable && col.type=='textArea'"  :value="text"  @change="(e)=>selectChange(e.target.value, record.key, col.label,)"/>
+            <a-input
+              v-if="record.editable && col.type == 'input'"
+              :value="text"
+              @change="
+                (e) => handleChange(e.target.value, record.key, col.label)
+              "
+            />
+            <a-input-number
+              v-if="record.editable && col.type == 'inputNumber'"
+              :value="text"
+              @change="(e) => InputNumberChange(e, record.key, col.label)"
+            />
+            <a-select
+              v-if="record.editable && col.type == 'select'"
+              @change="(e) => selectChange(e, record.key, col.label)"
+              :value="text"
+            >
+              <a-select-option
+                v-for="i in selectArr"
+                :key="i.key"
+                :value="i.key"
+              >
+                {{ i.value }}
+              </a-select-option>
+            </a-select>
+            <a-radio-group
+              v-if="record.editable && col.type == 'radio'"
+              :value="text"
+              @change="
+                (e) => selectChange(e.target.value, record.key, col.label)
+              "
+            >
+              <a-radio value="男">男</a-radio>
+              <a-radio value="女">女</a-radio>
+            </a-radio-group>
+            <a-date-picker
+              v-if="record.editable && col.type == 'datePicker'"
+              :valueFormat="dateFormat"
+              :value="text"
+              @change="(e) => dateChange(e, record.key, col.label)"
+            ></a-date-picker>
+            <a-textarea
+              v-if="record.editable && col.type == 'textArea'"
+              :value="text"
+              @change="
+                (e) => selectChange(e.target.value, record.key, col.label)
+              "
+            />
           </div>
           <template v-else>
             {{ text }}
@@ -70,8 +97,8 @@
 </template>
 <script>
 import CommonForm from "./commonForm";
-import moment from 'moment'
-import {tableMock,diqu} from '../api/index.js'
+import moment from "moment";
+import { tableMock, diqu } from "../api/index.js";
 const columns = [
   {
     title: "name",
@@ -161,29 +188,36 @@ export default {
           disabled: false,
         },
       ],
-       selectArr: [
-            { value: 1, key: 1 },
-            { value: 2, key: 2 },
-          ],
-      callArr:[{
-        label:'name',
-        type:'input'
-      },{
-        label:'age',
-        type:'inputNumber',
-      },{
-        label:'address',
-        type:'select',
-      },{
-        label:'sex',
-        type:'radio'
-      },{
-        label:'date',
-        type:'datePicker'
-      },{
-        label:'area',
-        type:'textArea'
-      }],
+      selectArr: [
+        { value: 1, key: 1 },
+        { value: 2, key: 2 },
+      ],
+      callArr: [
+        {
+          label: "name",
+          type: "input",
+        },
+        {
+          label: "age",
+          type: "inputNumber",
+        },
+        {
+          label: "address",
+          type: "select",
+        },
+        {
+          label: "sex",
+          type: "radio",
+        },
+        {
+          label: "date",
+          type: "datePicker",
+        },
+        {
+          label: "area",
+          type: "textArea",
+        },
+      ],
       form: {
         name: "",
         age: "",
@@ -236,9 +270,8 @@ export default {
           },
         ],
       },
-       dateFormat: 'YYYY-MM-DD',
-      
-   };
+      dateFormat: "YYYY-MM-DD",
+    };
   },
   components: {
     CommonForm,
@@ -250,10 +283,10 @@ export default {
         this.columns.splice(index, 1);
       }
     });
-    this.getData()
-    this.getDiQu()
-  
-   /*
+    this.getData();
+    this.getDiQu();
+
+    /*
  
     //在页面刷新时将vuex里的信息保存到sessionStorage里
     window.addEventListener("beforeunload",()=>{
@@ -269,20 +302,19 @@ export default {
         this.$forceUpdate()
     
   */
-
   },
   methods: {
     handleChange(value, key, column) {
       const newData = [...this.data];
       const target = newData.filter((item) => key === item.key)[0];
-      console.log(target,'target')
-      console.log(column,'column')
+      console.log(target, "target");
+      console.log(column, "column");
       if (target) {
         target[column] = value;
         this.data = newData;
       }
     },
-    InputNumberChange( value,key, column){
+    InputNumberChange(value, key, column) {
       const newData = [...this.data];
       const target = newData.filter((item) => key === item.key)[0];
       if (target) {
@@ -290,27 +322,26 @@ export default {
         this.data = newData;
       }
     },
-    selectChange(value,key, column){
-      console.log(value,'value')
-       const newData = [...this.data];
+    selectChange(value, key, column) {
+      console.log(value, "value");
+      const newData = [...this.data];
       const target = newData.filter((item) => key === item.key)[0];
       if (target) {
         target[column] = value;
         this.data = newData;
       }
     },
-      dateChange(value,key, column){
-     
-       const newData = [...this.data];
+    dateChange(value, key, column) {
+      const newData = [...this.data];
       const target = newData.filter((item) => key === item.key)[0];
       if (target) {
-        target[column] =value 
-        value=moment(value).format('YYYY-MM-DD');
-         
+        target[column] = value;
+        value = moment(value).format("YYYY-MM-DD");
+
         this.data = newData;
       }
     },
-    
+
     edit(key) {
       const newData = [...this.data];
       const target = newData.filter((item) => key === item.key)[0];
@@ -324,6 +355,7 @@ export default {
       const newData = [...this.data];
       const newCacheData = [...this.cacheData];
       const target = newData.filter((item) => key === item.key)[0];
+      target.editable=false
       const targetCache = newCacheData.filter((item) => key === item.key)[0];
       if (target && targetCache) {
         delete target.editable;
@@ -332,6 +364,8 @@ export default {
         this.cacheData = newCacheData;
       }
       this.editingKey = "";
+      sessionStorage.setItem("this.data", JSON.stringify(this.data));
+      sessionStorage.setItem("cacheData", JSON.stringify(this.cacheData));
     },
     cancel(key) {
       const newData = [...this.data];
@@ -395,18 +429,20 @@ export default {
         callback("只能输入数字");
       }
     },
-    getData(){
-      tableMock().then(res=>{
-       
-        this.data=res.data
-      })
+    getData() {
+      this.data = JSON.parse(sessionStorage.getItem("this.data"));
+      if (!this.data) {
+        tableMock().then((res) => {
+          this.data = res.data;
+        });
+      }
     },
-    getDiQu(){
-      diqu().then(res=>{
-         console.log(res,'res')
-        this.selectArr=res.data
-      })
-    }
+    getDiQu() {
+      diqu().then((res) => {
+        console.log(res, "res");
+        this.selectArr = res.data;
+      });
+    },
   },
 };
 </script>
