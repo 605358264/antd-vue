@@ -377,6 +377,8 @@ export default {
         delete target.editable;
         this.data = newData;
       }
+      sessionStorage.setItem("this.data", JSON.stringify(this.data));
+      sessionStorage.setItem("cacheData", JSON.stringify(this.cacheData));
     },
     addM() {
       this.form = {
@@ -394,6 +396,8 @@ export default {
       console.log(data, "data");
       this.data = data.filter((item) => item.key !== key);
       this.editingKey = "";
+      sessionStorage.setItem("this.data", JSON.stringify(this.data));
+      sessionStorage.setItem("cacheData", JSON.stringify(this.cacheData));
     },
     ok(form) {
       if (!form.name) {
@@ -414,6 +418,8 @@ export default {
       // this.cacheData.push(form)
       // Vue.set(this.data,this.data.length-1,form)
       this.visible = false;
+      sessionStorage.setItem("this.data", JSON.stringify(this.data));
+      sessionStorage.setItem("cacheData", JSON.stringify(this.cacheData));
     },
     typeNumber(rule, value, callback) {
       value = this.form.age;
