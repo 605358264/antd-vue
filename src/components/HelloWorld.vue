@@ -336,8 +336,6 @@ export default {
       const target = newData.filter((item) => key === item.key)[0];
       if (target) {
         target[column] = value;
-        value = moment(value).format("YYYY-MM-DD");
-
         this.data = newData;
       }
     },
