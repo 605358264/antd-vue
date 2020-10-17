@@ -49,5 +49,31 @@
 ],
 "diqu":[
     {"value":"湖北","key":"湖北"},{"key":"湖南","value":"湖南"},{"value":"北京","key":"北京"},{"value":"山东","key":"山东"},{"value":"上海","key":"上海"},{"value":"重庆","key":"重庆"},{"value":"广东","key":"广东"},{"value":"广西","key":"广西"},{"value":"河南","key":"河南"},{"value":"河北","key":"河北"}
-]
+],
+"callArr": [
+    {
+      "label": "name",
+      "type": "input"
+    },
+    {
+      "label": "age",
+      "type": "inputNumber"
+    },
+    {
+      "label": "address",
+      "type": "select"
+    },
+    {
+      "label": "sex",
+      "type": "radio"
+    },
+    {
+      "label": "date",
+      "type": "datePicker"
+    },
+    {
+      "label": "area",
+      "type": "textArea"
+    }
+  ]
 }

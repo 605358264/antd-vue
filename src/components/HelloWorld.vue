@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-button @click="addM">add</a-button>
+  
     <a-table :columns="columns" :data-source="data" bordered>
       <template
         v-for="col in callArr"
@@ -9,7 +10,9 @@
       >
         <div :key="col.label">
           <div v-if="record.editable">
-            <a-input
+            <a-form-model :rules="rules" :model="record">
+              <a-form-model-item :prop="col.label">
+                <a-input
               v-if="record.editable && col.type == 'input'"
               :value="text"
               @change="
@@ -57,6 +60,10 @@
                 (e) => selectChange(e.target.value, record.key, col.label)
               "
             />
+              </a-form-model-item>
+              
+            </a-form-model>
+            
           </div>
           <template v-else>
             {{ text }}
@@ -98,7 +105,7 @@
 <script>
 import CommonForm from "./commonForm";
 import moment from "moment";
-import { tableMock, diqu } from "../api/index.js";
+import { tableMock, diqu,callArr } from "../api/index.js";
 const columns = [
   {
     title: "name",
@@ -193,30 +200,7 @@ export default {
         { value: 2, key: 2 },
       ],
       callArr: [
-        {
-          label: "name",
-          type: "input",
-        },
-        {
-          label: "age",
-          type: "inputNumber",
-        },
-        {
-          label: "address",
-          type: "select",
-        },
-        {
-          label: "sex",
-          type: "radio",
-        },
-        {
-          label: "date",
-          type: "datePicker",
-        },
-        {
-          label: "area",
-          type: "textArea",
-        },
+       
       ],
       form: {
         name: "",
@@ -230,7 +214,7 @@ export default {
         name: [
           {
             required: true,
-            message: "Please input Activity name",
+            message: "Please input name",
             trigger: "blur",
           },
           {
@@ -278,13 +262,15 @@ export default {
   },
   created() {},
   mounted() {
+    this.callArrQ()
+     this.getData();
+    this.getDiQu();
     this.columns.map((item, index) => {
       if (item.status == 2) {
         this.columns.splice(index, 1);
       }
     });
-    this.getData();
-    this.getDiQu();
+   
 
     /*
  
@@ -443,10 +429,17 @@ export default {
     },
     getDiQu() {
       diqu().then((res) => {
-        console.log(res, "res");
+      
         this.selectArr = res.data;
       });
     },
+    callArrQ(){
+      callArr().then((res)=>{
+        console.log(res,'res1')
+        this.callArr=res.data
+      })
+    },
+ 
   },
 };
 </script>
