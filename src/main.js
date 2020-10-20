@@ -12,6 +12,7 @@ import InputNumber from 'ant-design-vue/lib/input-number'
 import TextArea from 'ant-design-vue/lib/input'
 import Select from 'ant-design-vue/lib/select'
 import FormModel from 'ant-design-vue/lib/form-model'
+import Form from 'ant-design-vue/lib/form'
 import Radio from 'ant-design-vue/lib/radio'
 import Switch from 'ant-design-vue/lib/switch'
 import Datepicker from 'ant-design-vue/lib/date-picker'
@@ -30,6 +31,7 @@ Vue.component(Icon.name,Icon)
 Vue.component(Popconfirm.name,Popconfirm)
 Vue.component(Input.name,Input)
 Vue.use(Select)
+Vue.use(Form)
 Vue.use(Modal)
 Vue.use(FormModel)
 Vue.use(Radio)

@@ -2,7 +2,7 @@
   <div>
     <a-button @click="addM">add</a-button>
   
-    <a-table :columns="columns" :data-source="data" bordered>
+    <a-table :columns="columns" :data-source="data" :rowClassName="setRowClassName" bordered>
       <template
         v-for="col in callArr"
         :slot="col.label"
@@ -112,6 +112,7 @@ const columns = [
     dataIndex: "name",
     status: 1,
     scopedSlots: { customRender: "name" },
+  
   },
   {
     title: "age",
@@ -124,6 +125,9 @@ const columns = [
     dataIndex: "address",
     status: 1,
     scopedSlots: { customRender: "address" },
+      render:(text,record,index)=>{
+      console.log(record,'record')
+    }
   },
   {
     title: "sex",
@@ -439,6 +443,11 @@ export default {
         this.callArr=res.data
       })
     },
+    setRowClassName (record) {
+  //状态0为失败，1为成功
+  console.log(record,'0009')
+  return record.area === 1 ? "success" : "error"
+}
  
   },
 };
@@ -446,5 +455,9 @@ export default {
 <style scoped>
 .editable-row-operations a {
   margin-right: 8px;
+}
+
+.error {
+  color: red;
 }
 </style>
